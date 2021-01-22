@@ -11,24 +11,8 @@ const translate = new Translate({
   keyFilename: './google-secrets.json'
 })
 
-router.get('/translate', async (req, res, next) => {
-  try {
-    const [result] = await client.labelDetection(
-      '//Users/jzeng/Grace-Hopper-Program/Stackathon/public/shiba-inu.jpg'
-    )
-    const labels = result.labelAnnotations
-
-    const englishArr = labels.map(label => label.description)
-
-    const translatedArr = []
-    for (let i = 0; i < englishArr.length; i++) {
-      const [translation] = await translate.translate(englishArr[i], 'zh-CN')
-      translatedArr.push(translation)
-    }
-    res.json(translatedArr)
-  } catch (err) {
-    console.error(err)
-  }
+router.get('/', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'upload.html'))
 })
 
 const storage = multer.diskStorage({
@@ -42,7 +26,22 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({storage})
-router.post('/single', upload.single('image'), (req, res) => {
-  console.log(req.file)
-  res.send('Single file upload successful')
+
+router.post('/single', upload.single('image'), async (req, res) => {
+  try {
+    const [result] = await client.labelDetection(req.file.path)
+    const labels = result.labelAnnotations
+
+    const englishArr = labels.map(label => label.description)
+
+    const translatedArr = []
+    for (let i = 0; i < englishArr.length; i++) {
+      const [translation] = await translate.translate(englishArr[i], 'zh-CN')
+      translatedArr.push(translation)
+    }
+    console.log('success')
+    res.json(englishArr)
+  } catch (err) {
+    console.error(err)
+  }
 })
