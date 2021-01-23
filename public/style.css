@@ -18,4 +18,36 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+  width: 500px;
+  height: 500px;
+}
+
+.pageBox {
+  background-color: rgba(255, 255, 255, 0.671);
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px 5px #b1b1b146;
+}
+
+section {
+  margin-top: 20px;
+}
+
+.upload-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+}
+
+.upload-form-container {
+  background-image: url('hello-wordle.png');
+  z-index: 10;
+}
+
+.single-plant-container img {
+  width: 300px;
+  height: auto;
 }

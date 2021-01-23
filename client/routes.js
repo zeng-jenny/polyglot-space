@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+// import {Login, Signup, UserHome} from './components'
 import Upload from './components/Upload'
+import SingleImage from './components/SingleImage'
 import {me} from './store'
 
 /**
@@ -15,10 +16,11 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    // const {isLoggedIn} = this.props
 
     return (
       <Switch>
+        <Route path="/image/:imageId" component={SingleImage} />
         <Route path="/" component={Upload} />
       </Switch>
     )
@@ -52,6 +54,6 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
  * PROP TYPES
  */
 Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  loadInitialData: PropTypes.func.isRequired
+  // isLoggedIn: PropTypes.bool.isRequired
 }
