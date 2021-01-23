@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 // import {Login, Signup, UserHome} from './components'
 import Upload from './components/Upload'
 import SingleImage from './components/SingleImage'
+import Home from './components/Home'
 import {me} from './store'
 
 /**
@@ -20,8 +21,9 @@ class Routes extends Component {
 
     return (
       <Switch>
-        <Route path="/image/:imageId" component={SingleImage} />
-        <Route path="/" component={Upload} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/image/upload" component={Upload} />
+        <Route exact path="/image/:imageId" component={SingleImage} />
       </Switch>
     )
   }

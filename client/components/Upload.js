@@ -2,29 +2,52 @@ import React from 'react'
 import axios from 'axios'
 import {addImage} from '../store/image'
 import {connect} from 'react-redux'
-import {Columns, Button, Section, Heading, Form} from 'react-bulma-components'
+import {Link} from 'react-router-dom'
 
 export class Upload extends React.Component {
   constructor() {
     super()
-    this.set = {
+    this.state = {
       image: {},
-      language: 'English'
+      language: 'English',
+      isLoading: false
     }
     this.handleChange = this.handleChange.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.postFile = this.postFile.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleFileChange = this.handleFileChange.bind(this)
   }
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
-  // handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   const formData = new FormData()
-  //   formData.append('image', this.state.image)
-  //   this.props.addImage(formData)
-  // }
+
+  postFile = async file => {
+    const formdata = new FormData()
+    formdata.append('file', file)
+    formdata.append('language', this.state.language)
+    try {
+      const result = await axios.post('/api/image/single', formdata)
+      this.setState({
+        image: result
+      })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  handleSubmit = async e => {
+    e.preventDefault()
+    setTimeout(() => {
+      this.setState(prevState => ({
+        isLoading: !prevState.isLoading
+      }))
+    })
+    const data = await axios.post('/api/image/translate', this.state)
+    this.props.history.push(`/image/${data.data.id}`)
+  }
 
   render() {
     return (
@@ -32,18 +55,17 @@ export class Upload extends React.Component {
         <div className="upload-form">
           <section className="pageBox" align="center">
             <h2>polyglot space</h2>
-            <form
-              // onSubmit={this.handleSubmit}
-              action="/api/image/single"
-              method="POST"
-              encType="multipart/form-data"
-            >
-              <div className="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+            <p>upload an image & learn a new language</p>
+            <form onSubmit={this.handleSubmit}>
+              <div className="choose-file input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                 <input
                   type="file"
                   name="image"
-                  className="form-control border-0"
-                  onChange={this.handleChange}
+                  className="form-control border-0 choose-file-btn"
+                  onChange={event => {
+                    const file = event.target.files[0]
+                    this.postFile(file)
+                  }}
                 />
                 <div className="input-group-append" />
               </div>
@@ -65,11 +87,22 @@ export class Upload extends React.Component {
                 </select>
               </div>
               <div>
-                <button className="curved-btn" type="submit">
-                  Submit
-                </button>
+                {this.state.isLoading ? (
+                  <button className="curved-btn" type="submit" disabled={true}>
+                    Translating...
+                  </button>
+                ) : (
+                  <button className="curved-btn" type="submit">
+                    Submit
+                  </button>
+                )}
               </div>
+              <button className="home-btn curved-btn" type="button">
+                <Link to="/">Home</Link>
+              </button>
             </form>
+
+            <div />
           </section>
         </div>
       </div>

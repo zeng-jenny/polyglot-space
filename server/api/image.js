@@ -40,44 +40,44 @@ const storage = multer.memoryStorage({
   }
 })
 
-const upload = multer({storage}).single('image')
+const upload = multer({storage}).single('file')
 
 router.post('/single', upload, async (req, res) => {
-  try {
-    let myFile = req.file.originalname.split('.')
-    const fileName = Date.now() + myFile[0]
-    const fileType = myFile[myFile.length - 1]
-    const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: fileName + `.${fileType}`,
-      Body: req.file.buffer,
-      ContentType: req.file.mimetype,
-      ACL: 'public-read'
-    }
-
-    const data = await s3.upload(params).promise()
-
-    const [result] = await client.labelDetection(data.Location)
-    const labels = result.labelAnnotations
-
-    const englishArr = labels.map(label => label.description)
-    const translatedArr = []
-    for (let i = 0; i < englishArr.length; i++) {
-      const [translation] = await translate.translate(
-        englishArr[i],
-        req.body.language
-      )
-      translatedArr.push(translation)
-    }
-    const photo = await Photo.create({
-      filename: data.key,
-      path: data.Location,
-      englishWords: englishArr,
-      translatedWords: translatedArr
-    })
-    // console.log(data)
-    res.redirect(`/image/${photo.id}`)
-  } catch (err) {
-    console.error(err)
+  let myFile = req.file.originalname.split('.')
+  const fileName = Date.now() + myFile[0]
+  const fileType = myFile[myFile.length - 1]
+  const params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: fileName + `.${fileType}`,
+    Body: req.file.buffer,
+    ContentType: req.file.mimetype,
+    ACL: 'public-read'
   }
+
+  const data = await s3.upload(params).promise()
+
+  res.json(data)
+})
+
+router.post('/translate', upload, async (req, res) => {
+  const [result] = await client.labelDetection(req.body.image.data.Location)
+  const labels = result.labelAnnotations
+
+  const englishArr = labels.map(label => label.description)
+  const translatedArr = []
+  for (let i = 0; i < englishArr.length; i++) {
+    const [translation] = await translate.translate(
+      englishArr[i],
+      req.body.language
+    )
+    translatedArr.push(translation)
+  }
+  const photo = await Photo.create({
+    filename: req.body.image.data.key,
+    path: req.body.image.data.Location,
+    language: req.body.language,
+    englishWords: englishArr,
+    translatedWords: translatedArr
+  })
+  res.json(photo)
 })
