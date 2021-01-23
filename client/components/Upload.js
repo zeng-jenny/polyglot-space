@@ -31,26 +31,44 @@ export class Upload extends React.Component {
       <div className="upload-form-container">
         <div className="upload-form">
           <section className="pageBox" align="center">
+            <h2>polyglot space</h2>
             <form
               // onSubmit={this.handleSubmit}
               action="/api/image/single"
               method="POST"
               encType="multipart/form-data"
             >
-              <input type="file" name="image" onChange={this.handleChange} />
-              <select name="language" onChange={this.handleChange}>
-                <option value="language" hidden>
-                  Select a Language
-                </option>
-                <option value="zh-CN">Chinese</option>
-                <option value="ja">Japanese</option>
-                <option value="ru">Russian</option>
-                <option value="es">Spanish</option>
-                <option value="sv">Swedish</option>
-                <option value="vi">Vietnamese</option>
-              </select>
-
-              <button type="submit">Submit</button>
+              <div className="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                <input
+                  type="file"
+                  name="image"
+                  className="form-control border-0"
+                  onChange={this.handleChange}
+                />
+                <div className="input-group-append" />
+              </div>
+              <div className="select is-primary">
+                <select
+                  name="language"
+                  className="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"
+                  onChange={this.handleChange}
+                >
+                  <option value="language" hidden>
+                    Select a Language
+                  </option>
+                  <option value="zh-CN">Chinese</option>
+                  <option value="ja">Japanese</option>
+                  <option value="ru">Russian</option>
+                  <option value="es">Spanish</option>
+                  <option value="sv">Swedish</option>
+                  <option value="vi">Vietnamese</option>
+                </select>
+              </div>
+              <div>
+                <button className="curved-btn" type="submit">
+                  Submit
+                </button>
+              </div>
             </form>
           </section>
         </div>

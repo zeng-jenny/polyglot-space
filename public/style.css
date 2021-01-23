@@ -1,53 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 body {
   font-family: sans-serif;
-}
-
-a {
-  text-decoration: none;
-}
-
-label {
-  display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
-form div {
-  margin: 1em;
-  display: inline-block;
-  width: 500px;
-  height: 500px;
-}
-
-.pageBox {
-  background-color: rgba(255, 255, 255, 0.671);
-  border-radius: 20px;
-  box-shadow: 5px 5px 15px 5px #b1b1b146;
-}
-
-section {
-  margin-top: 20px;
-}
-
-.upload-form {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 500px;
+  height: 100vh;
+  background-color: #ffffff;
+  text-align: center;
 }
 
 .upload-form-container {
   background-image: url('hello-wordle.png');
-  z-index: 10;
+  width: 100%;
+  height: 95vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  overflow: hidden;
+  display: flex;
 }
 
-.single-plant-container img {
-  width: 300px;
-  height: auto;
+.upload-form h2 {
+  font-family: 'Sawarabi Mincho', sans-serif;
+  margin-top: 25px;
+  color: rgb(131, 52, 52);
+  font-size: 48px;
+}
+
+.pageBox {
+  background-color: rgba(228, 226, 226, 0.929);
+  border-radius: 20px;
+  box-shadow: 7px 7px 17px 7px #53515146;
+  width: 600px;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.pageBox2 {
+  background-color: rgb(231, 227, 227);
+  border-radius: 30px;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
+}
+
+form {
+  display: inline-block;
+  left: 50%;
+  top: 50%;
+  position: fixed;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+.curved-btn {
+  border-radius: 20px;
+  background-color: white;
+  border: 1px solid gray;
+  font-size: 1rem;
+}
+
+select {
+  border-radius: 4px;
+  border: 1px solid #aaaaaa;
 }
