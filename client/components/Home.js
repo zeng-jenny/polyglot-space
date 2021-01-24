@@ -5,14 +5,18 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="home-pageBox">
-        <h2>polyglot space</h2>
-        <p>a digital place to:</p>
-        <button className="curved-btn" type="button">
-          <Link to="/image/upload">learn an image in a new language</Link>
-        </button>
-        <button className="home-btn curved-btn" type="button">
-          <Link to="/word">learn a word in a new language</Link>
-        </button>
+        <div className="home">
+          <h1 className="app-name">polyglot space</h1>
+          <p>a digital place to:</p>
+          <div className="home-links">
+            <button className="curved-btn" type="button">
+              <Link to="/image/upload">learn a new language through image</Link>
+            </button>
+            <button className="home-btn curved-btn" type="button">
+              <Link to="/word">learn a new language through text</Link>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   )

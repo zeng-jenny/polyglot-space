@@ -31,8 +31,7 @@ export const addImage = image => {
   return async dispatch => {
     try {
       const {data} = await axios.post('/api/image/single', image)
-      dispatch(uploadImage(data))
-      dispatch(fetchImage(data.id))
+      return dispatch(uploadImage(data))
     } catch (err) {
       console.error(err)
     }

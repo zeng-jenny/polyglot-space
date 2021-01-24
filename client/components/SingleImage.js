@@ -22,16 +22,16 @@ export class SingleImage extends React.Component {
   }
   render() {
     const {image} = this.props
-    console.log(this.props.image.englishWords)
+    // console.log(this.props.image.englishWords)
     let engKey = 0
     let transKey = 0
     return (
-      <div className="single-image-background">
-        <div className="single-image-container pageBox2">
+      <div className="single-image-container">
+        <div className="single-image-pageBox">
           <img src={image.path} />
           <div className="translation">
             <div className="english">
-              <h3>English:</h3>
+              <h3>English</h3>
               <ul>
                 {image.englishWords &&
                   image.englishWords.map(word => {

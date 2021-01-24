@@ -18,10 +18,10 @@ const translate = new Translate({
 
 router.use(cors())
 
-router.get('/', async (req, res, next) => {
-  const photos = await Photo.findAll()
-  res.json(photos)
-})
+// router.get('/', async (req, res, next) => {
+//   const photos = await Photo.findAll()
+//   res.json(photos)
+// })
 
 router.get('/:imageId', async (req, res, next) => {
   const photo = await Photo.findByPk(req.params.imageId)
@@ -56,11 +56,7 @@ router.post('/single', upload, async (req, res) => {
 
   const data = await s3.upload(params).promise()
 
-  res.json(data)
-})
-
-router.post('/translate', upload, async (req, res) => {
-  const [result] = await client.labelDetection(req.body.image.data.Location)
+  const [result] = await client.labelDetection(data.Location)
   const labels = result.labelAnnotations
 
   const englishArr = labels.map(label => label.description)
@@ -73,8 +69,8 @@ router.post('/translate', upload, async (req, res) => {
     translatedArr.push(translation)
   }
   const photo = await Photo.create({
-    filename: req.body.image.data.key,
-    path: req.body.image.data.Location,
+    filename: data.key,
+    path: data.Location,
     language: req.body.language,
     englishWords: englishArr,
     translatedWords: translatedArr
