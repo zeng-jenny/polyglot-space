@@ -43,7 +43,7 @@ export class Upload extends React.Component {
     formdata.append('language', this.state.language)
     try {
       const image = await this.props.addImage(formdata)
-      // console.log(image.image.id)
+      console.log('IMAGE', image.id)
       this.props.history.push(`/image/${image.image.id}`)
     } catch (err) {
       console.error(err)

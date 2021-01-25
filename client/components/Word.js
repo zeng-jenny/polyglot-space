@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import {fetchWord, translateWord} from '../store/word'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 export class Word extends React.Component {
   constructor() {
@@ -27,9 +28,12 @@ export class Word extends React.Component {
 
   handleSubmit = async e => {
     e.preventDefault()
-    const data = await axios.post('/api/word', this.state)
-    const result = await axios.get(`/api/word/${data.data.id}`)
-    await this.props.fetchWord(result.data.id)
+    try {
+      const result = await this.props.translateWord(this.state)
+      await this.props.fetchWord(result.word.id)
+    } catch (err) {
+      console.log(err)
+    }
   }
   render() {
     return (
@@ -66,11 +70,12 @@ export class Word extends React.Component {
             <div>
               <h3>English:</h3>
               {this.props.word.word}
-              <h3>{this.state.displayLanguage[this.state.language]}:</h3>
+              <h3>{this.state.displayLanguage[this.props.word.language]}:</h3>
               {this.props.word.translatedWord}
             </div>
           )}
         </div>
+        <Link to="/">Back</Link>
       </div>
     )
   }
