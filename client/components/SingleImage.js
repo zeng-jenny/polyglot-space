@@ -57,7 +57,11 @@ export class SingleImage extends React.Component {
               </ul>
             </div>
           </div>
-          <Link to="/">Back</Link>
+          <div className="back-btn">
+            <button className="home-btn curved-btn" type="button">
+              <Link to="/">Back</Link>
+            </button>
+          </div>
         </div>
       </div>
     )

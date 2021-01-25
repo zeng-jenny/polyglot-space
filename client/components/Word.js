@@ -37,45 +37,60 @@ export class Word extends React.Component {
   }
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="word">Word to learn:</label>
-          <input
-            value={this.state.word}
-            type="text"
-            name="word"
-            onChange={this.handleChange}
-          />
-          <select
-            name="language"
-            className="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"
-            onChange={this.handleChange}
-          >
-            <option value="language" hidden>
-              Select a Language
-            </option>
-            <option value="zh-CN">Chinese</option>
-            <option value="ja">Japanese</option>
-            <option value="ru">Russian</option>
-            <option value="es">Spanish</option>
-            <option value="sv">Swedish</option>
-            <option value="vi">Vietnamese</option>
-          </select>
-          <button className="curved-btn" type="submit">
-            Submit
-          </button>
-        </form>
-        <div>
-          {this.props.word.id && (
-            <div>
-              <h3>English:</h3>
-              {this.props.word.word}
-              <h3>{this.state.displayLanguage[this.props.word.language]}:</h3>
-              {this.props.word.translatedWord}
+      <div className="word-container">
+        <div className="word-form">
+          <section className="word-pageBox">
+            <div className="word">
+              <h1 className="app-name">polyglot space</h1>
+              <p>enter a & learn a new language</p>
+              <form onSubmit={this.handleSubmit}>
+                <label htmlFor="word">Word to learn:</label>
+                <input
+                  value={this.state.word}
+                  type="text"
+                  name="word"
+                  onChange={this.handleChange}
+                />
+                <select
+                  name="language"
+                  className="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"
+                  onChange={this.handleChange}
+                >
+                  <option value="language" hidden>
+                    Select a Language
+                  </option>
+                  <option value="zh-CN">Chinese</option>
+                  <option value="ja">Japanese</option>
+                  <option value="ru">Russian</option>
+                  <option value="es">Spanish</option>
+                  <option value="sv">Swedish</option>
+                  <option value="vi">Vietnamese</option>
+                </select>
+                <button className="curved-btn" type="submit">
+                  Submit
+                </button>
+
+                <div>
+                  {this.props.word.id && (
+                    <div>
+                      <h3>English:</h3>
+                      {this.props.word.word}
+                      <h3>
+                        {this.state.displayLanguage[this.props.word.language]}:
+                      </h3>
+                      {this.props.word.translatedWord}
+                    </div>
+                  )}
+                </div>
+              </form>
+            </div>{' '}
+            <div className="back-btn">
+              <button className="home-btn curved-btn" type="button">
+                <Link to="/">Back</Link>
+              </button>
             </div>
-          )}
+          </section>
         </div>
-        <Link to="/">Back</Link>
       </div>
     )
   }

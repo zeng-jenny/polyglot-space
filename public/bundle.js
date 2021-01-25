@@ -247,9 +247,14 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: transKey++
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, tWord));
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "back-btn"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "home-btn curved-btn",
+        type: "button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
         to: "/"
-      }, "Back")));
+      }, "Back")))));
     }
   }]);
 
@@ -618,7 +623,17 @@ function (_React$Component) {
   _createClass(Word, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "word-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "word-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "word-pageBox"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "word"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "app-name"
+      }, "polyglot space"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "enter a & learn a new language"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "word"
@@ -649,9 +664,14 @@ function (_React$Component) {
       }, "Vietnamese")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "curved-btn",
         type: "submit"
-      }, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.word.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "English:"), this.props.word.word, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.displayLanguage[this.props.word.language], ":"), this.props.word.translatedWord)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+      }, "Submit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.word.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "English:"), this.props.word.word, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.displayLanguage[this.props.word.language], ":"), this.props.word.translatedWord)))), ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "back-btn"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "home-btn curved-btn",
+        type: "button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/"
-      }, "Back"));
+      }, "Back"))))));
     }
   }]);
 
@@ -45260,7 +45280,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
