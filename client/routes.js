@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import Upload from './components/Upload'
 import SingleImage from './components/SingleImage'
 import Home from './components/Home'
+import Word from './components/Word'
 import {me} from './store'
 
 /**
@@ -24,6 +25,7 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/image/upload" component={Upload} />
         <Route exact path="/image/:imageId" component={SingleImage} />
+        <Route exact path="/word" component={Word} />
       </Switch>
     )
   }

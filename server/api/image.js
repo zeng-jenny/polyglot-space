@@ -66,6 +66,7 @@ router.post('/single', upload, async (req, res) => {
       englishArr[i],
       req.body.language
     )
+    console.log('TRANSLATION', translation)
     translatedArr.push(translation)
   }
   const photo = await Photo.create({

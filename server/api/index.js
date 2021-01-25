@@ -5,6 +5,7 @@ const {Translate} = require('@google-cloud/translate').v2
 
 router.use('/users', require('./users'))
 router.use('/image', require('./image'))
+router.use('/word', require('./word'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')

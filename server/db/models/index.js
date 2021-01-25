@@ -1,5 +1,6 @@
 const User = require('./user')
 const Photo = require('./photo')
+const Word = require('./word')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -16,5 +17,6 @@ const Photo = require('./photo')
  */
 module.exports = {
   User,
-  Photo
+  Photo,
+  Word
 }
