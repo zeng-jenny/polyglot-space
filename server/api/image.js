@@ -1,28 +1,20 @@
-require('dotenv/config')
 const router = require('express').Router()
-// const path = require('path')
 const {Photo} = require('../db/models')
 module.exports = router
 const AWS = require('aws-sdk')
-// const { v4: uuidv4 } = require("uuid");
 const cors = require('cors')
 const multer = require('multer')
 const vision = require('@google-cloud/vision')
 const {Translate} = require('@google-cloud/translate').v2
 
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: JSON.parse(process.env.GCP_KEY_FILE)
+  keyFilename: './google-secrets.json'
 })
 const translate = new Translate({
-  keyFilename: JSON.parse(process.env.GCP_KEY_FILE)
+  keyFilename: './google-secrets.json'
 })
 
 router.use(cors())
-
-// router.get('/', async (req, res, next) => {
-//   const photos = await Photo.findAll()
-//   res.json(photos)
-// })
 
 router.get('/:imageId', async (req, res, next) => {
   try {

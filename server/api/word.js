@@ -3,7 +3,7 @@ const {Word} = require('../db/models')
 module.exports = router
 const {Translate} = require('@google-cloud/translate').v2
 const translate = new Translate({
-  keyFilename: JSON.parse(process.env.GCP_KEY_FILE)
+  keyFilename: './google-secrets.json'
 })
 
 router.get('/:wordId', async (req, res) => {
