@@ -24,8 +24,12 @@ router.use(cors())
 // })
 
 router.get('/:imageId', async (req, res, next) => {
-  const photo = await Photo.findByPk(req.params.imageId)
-  res.json(photo)
+  try {
+    const photo = await Photo.findByPk(req.params.imageId)
+    res.json(photo)
+  } catch (err) {
+    console.error(err)
+  }
 })
 
 const s3 = new AWS.S3({
@@ -53,28 +57,31 @@ router.post('/single', upload, async (req, res) => {
     ContentType: req.file.mimetype,
     ACL: 'public-read'
   }
+  try {
+    const data = await s3.upload(params).promise()
 
-  const data = await s3.upload(params).promise()
+    const [result] = await client.labelDetection(data.Location)
+    const labels = result.labelAnnotations
 
-  const [result] = await client.labelDetection(data.Location)
-  const labels = result.labelAnnotations
-
-  const englishArr = labels.map(label => label.description)
-  const translatedArr = []
-  for (let i = 0; i < englishArr.length; i++) {
-    const [translation] = await translate.translate(
-      englishArr[i],
-      req.body.language
-    )
-    console.log('TRANSLATION', translation)
-    translatedArr.push(translation)
+    const englishArr = labels.map(label => label.description)
+    const translatedArr = []
+    for (let i = 0; i < englishArr.length; i++) {
+      const [translation] = await translate.translate(
+        englishArr[i],
+        req.body.language
+      )
+      console.log('TRANSLATION', translation)
+      translatedArr.push(translation)
+    }
+    const photo = await Photo.create({
+      filename: data.key,
+      path: data.Location,
+      language: req.body.language,
+      englishWords: englishArr,
+      translatedWords: translatedArr
+    })
+    res.json(photo)
+  } catch (err) {
+    console.error(err)
   }
-  const photo = await Photo.create({
-    filename: data.key,
-    path: data.Location,
-    language: req.body.language,
-    englishWords: englishArr,
-    translatedWords: translatedArr
-  })
-  res.json(photo)
 })

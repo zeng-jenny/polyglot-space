@@ -3,25 +3,25 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: {
-        msg: 'First name cannot be empty'
-      }
-    }
-  },
+  // firstName: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false,
+  //   validate: {
+  //     notEmpty: {
+  //       msg: 'First name cannot be empty'
+  //     }
+  //   }
+  // },
 
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: {
-        msg: 'Last name cannot be empty'
-      }
-    }
-  },
+  // lastName: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false,
+  //   validate: {
+  //     notEmpty: {
+  //       msg: 'Last name cannot be empty'
+  //     }
+  //   }
+  // },
   email: {
     type: Sequelize.STRING,
     unique: true,
