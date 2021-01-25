@@ -9,6 +9,7 @@ const cors = require('cors')
 const multer = require('multer')
 const vision = require('@google-cloud/vision')
 const {Translate} = require('@google-cloud/translate').v2
+
 const client = new vision.ImageAnnotatorClient({
   keyFilename: process.env.GCP_KEY_FILE
 })
