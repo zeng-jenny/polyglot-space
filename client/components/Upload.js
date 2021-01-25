@@ -28,7 +28,6 @@ export class Upload extends React.Component {
     this.setState({
       language: evt.target.value
     })
-    console.log(this.state)
   }
 
   handleSubmit = async evt => {
@@ -43,7 +42,7 @@ export class Upload extends React.Component {
     formdata.append('language', this.state.language)
     try {
       const image = await this.props.addImage(formdata)
-      console.log('IMAGE', image.id)
+      console.log('IMAGE', image)
       this.props.history.push(`/image/${image.image.id}`)
     } catch (err) {
       console.error(err)

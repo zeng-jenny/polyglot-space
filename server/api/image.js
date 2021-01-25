@@ -10,10 +10,10 @@ const multer = require('multer')
 const vision = require('@google-cloud/vision')
 const {Translate} = require('@google-cloud/translate').v2
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: './google-secrets.json'
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS
 })
 const translate = new Translate({
-  keyFilename: './google-secrets.json'
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS
 })
 
 router.use(cors())
