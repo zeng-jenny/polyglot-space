@@ -11,10 +11,10 @@ const vision = require('@google-cloud/vision')
 const {Translate} = require('@google-cloud/translate').v2
 
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: process.env.GCP_KEY_FILE
+  keyFilename: JSON.parse(process.env.GCP_KEY_FILE)
 })
 const translate = new Translate({
-  keyFilename: process.env.GCP_KEY_FILE
+  keyFilename: JSON.parse(process.env.GCP_KEY_FILE)
 })
 
 router.use(cors())
