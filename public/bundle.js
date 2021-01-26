@@ -1565,7 +1565,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var GET_WORD = 'GET_WORD';
 var TRANSLATE_WORD = 'TRANSLATE_WORD';
-var CLEAR_WORD = "CLEAR_WORD";
+var CLEAR_WORD = 'CLEAR_WORD';
 
 var getWord = function getWord(word) {
   return {
