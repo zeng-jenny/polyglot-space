@@ -42,7 +42,7 @@ export class Word extends React.Component {
           <section className="word-pageBox">
             <div className="word">
               <h1 className="app-name">polyglot space</h1>
-              <p>enter a & learn a new language</p>
+              <p>enter a word & learn a new language</p>
               <form onSubmit={this.handleSubmit}>
                 <label htmlFor="word">Word to learn: </label>
                 <input
