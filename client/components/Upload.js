@@ -100,7 +100,7 @@ export class Upload extends React.Component {
                   )}
                 </div>
                 <button className="home-btn curved-btn" type="button">
-                  <Link to="/">Home</Link>
+                  <Link to="/">Back</Link>
                 </button>
               </form>
 

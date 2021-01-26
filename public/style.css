@@ -55,8 +55,13 @@ a {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-.home-btn {
+.text-btn {
   margin-top: 5px;
+}
+
+.home-btn {
+  margin-top: 45px;
+  margin-bottom: 10px;
 }
 
 .home-links {
@@ -196,4 +201,12 @@ select {
   display: inline-block;
   align-self: flex-end;
   margin-bottom: 1rem;
+}
+
+.word-translation {
+  margin-top: 10px;
+}
+
+input {
+  margin-left: 5px;
 }

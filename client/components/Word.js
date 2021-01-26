@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import {fetchWord, translateWord} from '../store/word'
+import {fetchWord, translateWord, clearWord} from '../store/word'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
@@ -44,7 +44,7 @@ export class Word extends React.Component {
               <h1 className="app-name">polyglot space</h1>
               <p>enter a & learn a new language</p>
               <form onSubmit={this.handleSubmit}>
-                <label htmlFor="word">Word to learn:</label>
+                <label htmlFor="word">Word to learn: </label>
                 <input
                   value={this.state.word}
                   type="text"
@@ -70,7 +70,7 @@ export class Word extends React.Component {
                   Submit
                 </button>
 
-                <div>
+                <div className="word-translation">
                   {this.props.word.id && (
                     <div>
                       <h3>English:</h3>
@@ -85,7 +85,11 @@ export class Word extends React.Component {
               </form>
             </div>{' '}
             <div className="back-btn">
-              <button className="home-btn curved-btn" type="button">
+              <button
+                className="home-btn curved-btn"
+                type="button"
+                onClick={this.props.clearWord}
+              >
                 <Link to="/">Back</Link>
               </button>
             </div>
@@ -97,7 +101,6 @@ export class Word extends React.Component {
 }
 
 const mapState = state => {
-  console.log('STATE', state)
   return {
     word: state.word
   }
@@ -106,7 +109,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchWord: wordId => dispatch(fetchWord(wordId)),
-    translateWord: word => dispatch(translateWord(word))
+    translateWord: word => dispatch(translateWord(word)),
+    clearWord: () => dispatch(clearWord())
   }
 }
 

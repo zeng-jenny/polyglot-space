@@ -12,7 +12,7 @@ const Home = () => {
             <button className="curved-btn" type="button">
               <Link to="/image/upload">learn a new language through image</Link>
             </button>
-            <button className="home-btn curved-btn" type="button">
+            <button className="text-btn curved-btn" type="button">
               <Link to="/word">learn a new language through text</Link>
             </button>
           </div>

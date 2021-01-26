@@ -143,7 +143,7 @@ var Home = function Home() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/image/upload"
   }, "learn a new language through image")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "home-btn curved-btn",
+    className: "text-btn curved-btn",
     type: "button"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/word"
@@ -473,7 +473,7 @@ function (_React$Component) {
         type: "button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/"
-      }, "Home"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)))));
+      }, "Back"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)))));
     }
   }]);
 
@@ -637,7 +637,7 @@ function (_React$Component) {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "word"
-      }, "Word to learn:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Word to learn: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         value: this.state.word,
         type: "text",
         name: "word",
@@ -664,11 +664,14 @@ function (_React$Component) {
       }, "Vietnamese")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "curved-btn",
         type: "submit"
-      }, "Submit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.word.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "English:"), this.props.word.word, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.displayLanguage[this.props.word.language], ":"), this.props.word.translatedWord)))), ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Submit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "word-translation"
+      }, this.props.word.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "English:"), this.props.word.word, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.displayLanguage[this.props.word.language], ":"), this.props.word.translatedWord)))), ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "back-btn"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "home-btn curved-btn",
-        type: "button"
+        type: "button",
+        onClick: this.props.clearWord
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/"
       }, "Back"))))));
@@ -679,7 +682,6 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 var mapState = function mapState(state) {
-  console.log('STATE', state);
   return {
     word: state.word
   };
@@ -692,6 +694,9 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     translateWord: function translateWord(word) {
       return dispatch(Object(_store_word__WEBPACK_IMPORTED_MODULE_2__["translateWord"])(word));
+    },
+    clearWord: function clearWord() {
+      return dispatch(Object(_store_word__WEBPACK_IMPORTED_MODULE_2__["clearWord"])());
     }
   };
 };
@@ -1543,13 +1548,14 @@ var logout = function logout() {
 /*!******************************!*\
   !*** ./client/store/word.js ***!
   \******************************/
-/*! exports provided: fetchWord, translateWord, default */
+/*! exports provided: fetchWord, translateWord, clearWord, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWord", function() { return fetchWord; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "translateWord", function() { return translateWord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearWord", function() { return clearWord; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1559,6 +1565,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var GET_WORD = 'GET_WORD';
 var TRANSLATE_WORD = 'TRANSLATE_WORD';
+var CLEAR_WORD = "CLEAR_WORD";
 
 var getWord = function getWord(word) {
   return {
@@ -1658,6 +1665,18 @@ var translateWord = function translateWord(word) {
     }()
   );
 };
+
+var clear = function clear() {
+  return {
+    type: CLEAR_WORD
+  };
+};
+
+var clearWord = function clearWord() {
+  return function (dispatch) {
+    dispatch(clear());
+  };
+};
 var initialState = {};
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -1669,6 +1688,9 @@ var initialState = {};
 
     case TRANSLATE_WORD:
       return action.word;
+
+    case CLEAR_WORD:
+      return initialState;
 
     default:
       return state;

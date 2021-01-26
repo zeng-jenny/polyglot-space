@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const GET_WORD = 'GET_WORD'
 const TRANSLATE_WORD = 'TRANSLATE_WORD'
+const CLEAR_WORD = 'CLEAR_WORD'
 
 const getWord = word => {
   return {
@@ -37,6 +38,17 @@ export const translateWord = word => {
   }
 }
 
+const clear = () => {
+  return {
+    type: CLEAR_WORD
+  }
+}
+
+export const clearWord = () => {
+  return dispatch => {
+    dispatch(clear())
+  }
+}
 const initialState = {}
 
 export default (state = initialState, action) => {
@@ -45,6 +57,8 @@ export default (state = initialState, action) => {
       return action.word
     case TRANSLATE_WORD:
       return action.word
+    case CLEAR_WORD:
+      return initialState
     default:
       return state
   }
